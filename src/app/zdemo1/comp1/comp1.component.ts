@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
+interface AppState {
+  count: number;
+}
 @Component({
   selector: 'app-comp1',
   templateUrl: './comp1.component.html',
@@ -7,7 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Comp1Component implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+    this.count$ = store.pipe(select('count'));
+  }
+
+  count$: Observable<number>;
 
   ngOnInit(): void {
   }
